@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn first_part(xs: &Vec<String>, is_first_part: bool) -> i32 {
+pub fn count_overlaps(xs: &Vec<String>, is_first_part: bool) -> i32 {
     let mut freq = HashMap::new();
 
     for s in xs.iter() {
@@ -45,11 +45,11 @@ pub fn first_part(xs: &Vec<String>, is_first_part: bool) -> i32 {
 
 #[cfg(test)]
 mod tests {
-    use super::first_part;
+    use super::count_overlaps;
 
     #[test]
     fn first_part_works() {
-        let xs: Vec<String> = "0,9 -> 5,9
+        let xs = "0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
 2,2 -> 2,1
@@ -62,12 +62,12 @@ mod tests {
             .split('\n')
             .map(|s| s.to_string())
             .collect();
-        assert_eq!(first_part(&xs, true), 5);
+        assert_eq!(count_overlaps(&xs, true), 5);
     }
 
     #[test]
     fn second_part_works() {
-        let xs: Vec<String> = "0,9 -> 5,9
+        let xs = "0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
 2,2 -> 2,1
@@ -80,6 +80,6 @@ mod tests {
             .split('\n')
             .map(|s| s.to_string())
             .collect();
-        assert_eq!(first_part(&xs, false), 12);
+        assert_eq!(count_overlaps(&xs, false), 12);
     }
 }

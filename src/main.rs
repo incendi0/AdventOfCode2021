@@ -9,6 +9,7 @@ mod day04;
 mod day05;
 mod day06;
 mod day07;
+mod day08;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -38,7 +39,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     {
         let xs = read_to_vec("./input/day04.txt")?;
-        let xs: Vec<&str> = xs.iter().map(|s| &**s).collect();
         let (seq, xxs) = day04::parse_day04(xs);
         println!("day04::partA result: {}", day04::first_part(&seq, &xxs));
         println!("day04::partB result: {}", day04::second_part(&seq, &xxs));
@@ -46,8 +46,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     {
         let xs = read_to_vec("./input/day05.txt")?;
-        println!("day05::partA result: {}", day05::first_part(&xs, true));
-        println!("day05::partB result: {}", day05::first_part(&xs, false));
+        println!("day05::partA result: {}", day05::count_overlaps(&xs, true));
+        println!("day05::partB result: {}", day05::count_overlaps(&xs, false));
     }
 
     {
@@ -62,6 +62,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         let mut xs = xs[0].split(",").map(|s| s.parse::<i32>().unwrap()).collect();
         println!("day07::partA result: {}", day07::first_part(&mut xs));
         println!("day07::partB result: {}", day07::second_part(&mut xs));
+    }
+
+    {
+        let xs = read_to_vec("./input/day08.txt")?;
+        println!("day08::partA result: {}", day08::first_part(&xs));
+        // println!("day08::partB result: {}", day08::second_part(&mut xs));
     }
 
     Ok(())

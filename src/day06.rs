@@ -42,7 +42,6 @@ mod tests {
     #[test]
     fn first_part_works() {
         let mut xs = vec![3, 4, 3, 1, 2];
-        // let mut xs = vec![3];
         assert_eq!(simulate(&mut xs, 18), 26);
         assert_eq!(simulate(&mut xs, 80), 5934);
     }

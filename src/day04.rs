@@ -78,7 +78,7 @@ fn complete_board(board: &Vec<Vec<bool>>) -> bool {
     }
 }
 
-pub fn parse_day04(mut xs: Vec<&str>) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
+pub fn parse_day04(mut xs: Vec<String>) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
     let seq: Vec<i32> = xs
         .remove(0)
         .split(',')
@@ -87,7 +87,7 @@ pub fn parse_day04(mut xs: Vec<&str>) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
     let mut xxs: Vec<Vec<Vec<i32>>> = Vec::with_capacity(seq.len());
     for ss in xs.chunks(6) {
         let mut matrix: Vec<Vec<i32>> = vec![];
-        for &s in ss.iter().skip(1) {
+        for s in ss.iter().skip(1) {
             matrix.push(
                 s.split_ascii_whitespace()
                     .map(|e| e.parse::<i32>().unwrap())
@@ -127,7 +127,7 @@ mod tests {
 18  8 23 26 20
 22 11 13  6  5
  2  0 12  3  7";
-        let (seq, xxs) = parse_day04(s.split('\n').collect());
+        let (seq, xxs) = parse_day04(s.split('\n').map(|s| s.to_string()).collect());
         assert_eq!(first_part(&seq, &xxs), 4512);
     }
 
@@ -152,7 +152,7 @@ mod tests {
 18  8 23 26 20
 22 11 13  6  5
  2  0 12  3  7";
-        let (seq, xxs) = parse_day04(s.split('\n').collect());
+        let (seq, xxs) = parse_day04(s.split('\n').map(|s| s.to_string()).collect());
         assert_eq!(second_part(&seq, &xxs), 1924);
     }
 }
