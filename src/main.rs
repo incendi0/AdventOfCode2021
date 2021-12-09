@@ -67,7 +67,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         let xs = read_to_vec("./input/day08.txt")?;
         println!("day08::partA result: {}", day08::first_part(&xs));
-        // println!("day08::partB result: {}", day08::second_part(&mut xs));
+        println!("day08::partB result: {}", day08::second_part(&xs));
     }
 
     Ok(())

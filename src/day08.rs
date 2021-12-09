@@ -27,7 +27,7 @@ fn calculate_entry(s: &str) -> i32 {
     // 0, 6, 9根据1，获取6
     let mut six_idx = 0;
     for (i, s) in shuffled.iter().enumerate() {
-        if s.len() == 6 && contains(s, &one) {
+        if s.len() == 6 && !contains(s, &one) {
             six_idx = i;
             break;
         }
@@ -45,17 +45,25 @@ fn calculate_entry(s: &str) -> i32 {
     let mut five_idx = 0;
     'outer:
     for i in 0..shuffled.len() {
-        for j in 0..i {
-            if contains(shuffled[i], &shuffled[j].as_bytes().to_vec()) {
+        for j in 0..shuffled.len() {
+            if i != j && contains(shuffled[i], &shuffled[j].as_bytes().to_vec()) {
                 nine_idx = i;
                 five_idx = j;
                 break 'outer;
             }
         }
     }
-    let nine = remove_idx(&mut shuffled, nine_idx);
-    let five = remove_idx(&mut shuffled, five_idx);
-    let mut two_idx = 0;
+    // nine_idx is bigger
+    let nine: Vec<u8>;
+    let five: Vec<u8>;
+    if nine_idx > five_idx {
+        nine = remove_idx(&mut shuffled, nine_idx);
+        five = remove_idx(&mut shuffled, five_idx);
+    } else {
+        five = remove_idx(&mut shuffled, five_idx);
+        nine = remove_idx(&mut shuffled, nine_idx);
+    }
+    let two_idx: usize;
     if shuffled[0].len() == 5 {
         two_idx = 0;
     } else {
@@ -75,7 +83,6 @@ fn calculate_entry(s: &str) -> i32 {
         vs.sort();
         total = total * 10 + mapping.get(&vs).unwrap();
     }
-    println!("{:?}", total);
     total
 }
 
@@ -113,16 +120,16 @@ mod tests {
 
     #[test]
     fn first_part_works() {
-        let s = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe";
-// edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |fcgedb cgb dgebacf gc
-// fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |cg cg fdcagb cbg
-// fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |efabcd cedba gadfec cb
-// aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |gecf egdcabf bgf bfgea
-// fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |gebdcfa ecba ca fadegcb
-// dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |cefg dcbef fcge gbcadfe
-// bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |ed bcgafe cdgba cbgef
-// egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |gbdfcae bgc cg cgb
-// gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |fgae cfgab fg bagce";
+        let s = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe
+edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |fcgedb cgb dgebacf gc
+fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |cg cg fdcagb cbg
+fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |efabcd cedba gadfec cb
+aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |gecf egdcabf bgf bfgea
+fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |gebdcfa ecba ca fadegcb
+dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |cefg dcbef fcge gbcadfe
+bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |ed bcgafe cdgba cbgef
+egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |gbdfcae bgc cg cgb
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |fgae cfgab fg bagce";
         let xs = s.split('\n').map(|s| s.to_string()).collect();
         assert_eq!(first_part(&xs), 26);
     }
