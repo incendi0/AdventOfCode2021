@@ -1,6 +1,7 @@
+use crate::day09::read_to_matrix;
 use std::error::Error;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 
 mod day01;
 mod day02;
@@ -10,11 +11,13 @@ mod day05;
 mod day06;
 mod day07;
 mod day08;
+mod day09;
+mod day10;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
         let xs = read_to_vec("./input/day01.txt")?;
-        let xs = xs.iter().map(|s| s.parse::<i32>().unwrap()).collect();
+        let xs: Vec<i32> = xs.iter().map(|s| s.parse::<i32>().unwrap()).collect();
         println!("day01::partA result: {}", day01::first_part(&xs));
         println!("day01::partB result: {}", day01::second_part(&xs));
     }
@@ -52,14 +55,20 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     {
         let xs = read_to_vec("./input/day06.txt")?;
-        let xs = xs[0].split(",").map(|s| s.parse::<i32>().unwrap()).collect();
+        let xs = xs[0]
+            .split(",")
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
         println!("day06::partA result: {}", day06::simulate(&xs, 80));
         println!("day06::partB result: {}", day06::simulate(&xs, 256));
     }
 
     {
         let xs = read_to_vec("./input/day07.txt")?;
-        let mut xs = xs[0].split(",").map(|s| s.parse::<i32>().unwrap()).collect();
+        let mut xs = xs[0]
+            .split(',')
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
         println!("day07::partA result: {}", day07::first_part(&mut xs));
         println!("day07::partB result: {}", day07::second_part(&mut xs));
     }
@@ -70,6 +79,19 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day08::partB result: {}", day08::second_part(&xs));
     }
 
+    {
+        let s = read_to_string("./input/day09.txt")?;
+        let xs = read_to_matrix(&s);
+        println!("day09::partA result: {}", day09::first_part(&xs));
+        println!("day09::partB result: {}", day09::second_part(&xs));
+    }
+
+    {
+        let xs = read_to_vec("./input/day10.txt")?;
+        println!("day10::partA result: {}", day10::first_part(&xs));
+        println!("day10::partB result: {}", day10::second_part(&xs));
+    }
+
     Ok(())
 }
 
@@ -77,4 +99,11 @@ fn read_to_vec(filename: &str) -> Result<Vec<String>, Box<dyn Error>> {
     let data = File::open(filename)?;
     let data = BufReader::new(data);
     Ok(data.lines().map(|s| s.unwrap()).collect())
+}
+
+fn read_to_string(filename: &str) -> Result<String, Box<dyn Error>> {
+    let mut file = File::open(filename)?;
+    let mut s = String::new();
+    file.read_to_string(&mut s)?;
+    Ok(s)
 }

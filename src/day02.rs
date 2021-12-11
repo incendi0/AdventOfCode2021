@@ -1,4 +1,4 @@
-pub fn first_part(ss: &Vec<String>) -> i32 {
+pub fn first_part(ss: &[String]) -> i32 {
     let mut x = 0;
     let mut y = 0;
     for s in ss {
@@ -18,7 +18,7 @@ pub fn first_part(ss: &Vec<String>) -> i32 {
     x * y
 }
 
-pub fn second_part(ss: &Vec<String>) -> i32 {
+pub fn second_part(ss: &[String]) -> i32 {
     let mut horizontal = 0;
     let mut depth = 0;
     let mut aim = 0;

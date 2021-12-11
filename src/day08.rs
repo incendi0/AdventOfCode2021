@@ -43,8 +43,7 @@ fn calculate_entry(s: &str) -> i32 {
     let three = remove_idx(&mut shuffled, three_idx);
     let mut nine_idx = 0;
     let mut five_idx = 0;
-    'outer:
-    for i in 0..shuffled.len() {
+    'outer: for i in 0..shuffled.len() {
         for j in 0..shuffled.len() {
             if i != j && contains(shuffled[i], &shuffled[j].as_bytes().to_vec()) {
                 nine_idx = i;
@@ -80,7 +79,7 @@ fn calculate_entry(s: &str) -> i32 {
     let mut total = 0;
     for s in xs[1].split_ascii_whitespace() {
         let mut vs = s.as_bytes().to_vec();
-        vs.sort();
+        vs.sort_unstable();
         total = total * 10 + mapping.get(&vs).unwrap();
     }
     total
@@ -89,9 +88,7 @@ fn calculate_entry(s: &str) -> i32 {
 fn contains(haystack: &str, needle: &Vec<u8>) -> bool {
     let haystack_set: HashSet<&u8> = haystack.as_bytes().iter().collect::<HashSet<&u8>>();
     let needle_set: HashSet<&u8> = needle.iter().collect();
-    let ret = haystack_set.is_superset(&needle_set);
-
-    ret
+    haystack_set.is_superset(&needle_set)
 }
 
 fn remove_len(xs: &mut Vec<&str>, len: usize) -> Vec<u8> {
@@ -109,7 +106,7 @@ fn remove_len(xs: &mut Vec<&str>, len: usize) -> Vec<u8> {
 
 fn remove_idx(xs: &mut Vec<&str>, idx: usize) -> Vec<u8> {
     let mut ret = xs.remove(idx).as_bytes().to_vec();
-    ret.sort();
+    ret.sort_unstable();
     ret
 }
 
@@ -120,7 +117,8 @@ mod tests {
 
     #[test]
     fn first_part_works() {
-        let s = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe
+        let s =
+            "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |fcgedb cgb dgebacf gc
 fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |cg cg fdcagb cbg
 fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |efabcd cedba gadfec cb
@@ -136,14 +134,16 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |fgae cfgab fg bagce"
 
     #[test]
     fn second_part_works() {
-        let s = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+        let s =
+            "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
         let xs = s.split('\n').map(|s| s.to_string()).collect();
         assert_eq!(second_part(&xs), 5353);
     }
 
     #[test]
     fn second_part_works2() {
-        let s = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe
+        let s =
+            "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |fcgedb cgb dgebacf gc
 fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |cg cg fdcagb cbg
 fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |efabcd cedba gadfec cb

@@ -10,7 +10,7 @@ pub fn count_overlaps(xs: &Vec<String>, is_first_part: bool) -> i32 {
             .map(|s| s.parse::<i32>().unwrap())
             .collect();
         let end: Vec<i32> = points[1]
-            .split(",")
+            .split(',')
             .map(|s| s.parse::<i32>().unwrap())
             .collect();
         if start[0] == end[0] {
@@ -25,17 +25,15 @@ pub fn count_overlaps(xs: &Vec<String>, is_first_part: bool) -> i32 {
                 let count = freq.entry((x, start[1])).or_insert(0);
                 *count += 1;
             }
-        } else {
-            if !is_first_part {
-                let (l, r) = (start[1].min(end[1]), start[1].max(end[1]));
-                let denom = end[1] - start[1];
-                for y in l..=r {
-                    let num = end[0] * y - end[0] * start[1] - start[0] * y + start[0] * end[1];
-                    if num % denom == 0 {
-                        let x = num / denom;
-                        let count = freq.entry((x, y)).or_insert(0);
-                        *count += 1;
-                    }
+        } else if !is_first_part {
+            let (l, r) = (start[1].min(end[1]), start[1].max(end[1]));
+            let denom = end[1] - start[1];
+            for y in l..=r {
+                let num = end[0] * y - end[0] * start[1] - start[0] * y + start[0] * end[1];
+                if num % denom == 0 {
+                    let x = num / denom;
+                    let count = freq.entry((x, y)).or_insert(0);
+                    *count += 1;
                 }
             }
         }

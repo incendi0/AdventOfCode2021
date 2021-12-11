@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn first_part(seq: &Vec<i32>, xxs: &Vec<Vec<Vec<i32>>>) -> i32 {
+pub fn first_part(seq: &[i32], xxs: &[Vec<Vec<i32>>]) -> i32 {
     let n = xxs.len();
     let (row, col) = (xxs[0].len(), xxs[0][0].len());
     let mut visited: Vec<Vec<Vec<bool>>> = vec![vec![vec![false; row]; col]; n];
@@ -22,7 +22,7 @@ pub fn first_part(seq: &Vec<i32>, xxs: &Vec<Vec<Vec<i32>>>) -> i32 {
     -1
 }
 
-pub fn second_part(seq: &Vec<i32>, xxs: &Vec<Vec<Vec<i32>>>) -> i32 {
+pub fn second_part(seq: &[i32], xxs: &[Vec<Vec<i32>>]) -> i32 {
     let n = xxs.len();
     let (row, col) = (xxs[0].len(), xxs[0][0].len());
     let mut visited: Vec<Vec<Vec<bool>>> = vec![vec![vec![false; row]; col]; n];
@@ -48,7 +48,7 @@ pub fn second_part(seq: &Vec<i32>, xxs: &Vec<Vec<Vec<i32>>>) -> i32 {
     -1
 }
 
-fn calculate_board(visited: &Vec<Vec<bool>>, matrix: &Vec<Vec<i32>>, v: i32) -> i32 {
+fn calculate_board(visited: &[Vec<bool>], matrix: &[Vec<i32>], v: i32) -> i32 {
     let (row, col) = (matrix.len(), matrix[0].len());
     let mut unmarked_sum = 0;
     for i in 0..row {
@@ -61,7 +61,7 @@ fn calculate_board(visited: &Vec<Vec<bool>>, matrix: &Vec<Vec<i32>>, v: i32) -> 
     unmarked_sum * v
 }
 
-fn complete_board(board: &Vec<Vec<bool>>) -> bool {
+fn complete_board(board: &[Vec<bool>]) -> bool {
     let any_row_complete = board.iter().any(|row| row.iter().all(|&e| e));
     any_row_complete || {
         let (m, n) = (board.len(), board[0].len());

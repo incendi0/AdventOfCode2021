@@ -1,6 +1,6 @@
 // 选取中位数
 pub fn first_part(xs: &mut Vec<i32>) -> i32 {
-    xs.sort();
+    xs.sort_unstable();
     let n = xs.len();
     if n % 2 == 1 {
         calculate_cost(xs, n / 2)
@@ -11,7 +11,7 @@ pub fn first_part(xs: &mut Vec<i32>) -> i32 {
 
 // 选取平均值左右
 pub fn second_part(xs: &mut Vec<i32>) -> i32 {
-    xs.sort();
+    xs.sort_unstable();
     let n = xs.len();
     let mean: i32 = xs.iter().sum::<i32>() / n as i32;
     let mut ret = i32::MAX;

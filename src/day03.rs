@@ -1,4 +1,4 @@
-pub fn first_part(xs: &Vec<String>) -> i32 {
+pub fn first_part(xs: &[String]) -> i32 {
     let (n, m) = (xs.len(), xs[0].len());
     let count = count_bit_1(xs);
     let s: String = count
@@ -9,13 +9,13 @@ pub fn first_part(xs: &Vec<String>) -> i32 {
     ((usize::pow(2, m as u32) - 1 - u) * u) as i32
 }
 
-pub fn second_part(xs: &Vec<String>) -> i32 {
+pub fn second_part(xs: &[String]) -> i32 {
     let oxygen = find_rate(xs, true);
     let co2 = find_rate(xs, false);
     oxygen * co2
 }
 
-fn find_rate(xs: &Vec<String>, oxygen: bool) -> i32 {
+fn find_rate(xs: &[String], oxygen: bool) -> i32 {
     let m = xs[0].len();
     let mut ss: Vec<&[u8]> = xs.iter().map(|s| s.as_bytes()).collect();
     'outer: loop {
@@ -43,7 +43,7 @@ fn find_rate(xs: &Vec<String>, oxygen: bool) -> i32 {
     i32::from_str_radix(&s, 2).unwrap()
 }
 
-fn count_bit_1(xs: &Vec<String>) -> Vec<usize> {
+fn count_bit_1(xs: &[String]) -> Vec<usize> {
     let m = xs[0].len();
     let mut count: Vec<usize> = vec![];
     count.resize(m, 0);

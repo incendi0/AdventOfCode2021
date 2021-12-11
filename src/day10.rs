@@ -5,8 +5,12 @@ pub fn first_part(xs: &Vec<String>) -> i32 {
 }
 
 pub fn second_part(xs: &Vec<String>) -> i64 {
-    let mut points: Vec<i64> = xs.iter().map(|s| illegal_point2(s)).filter(|&p| p > 0).collect();
-    points.sort();
+    let mut points: Vec<i64> = xs
+        .iter()
+        .map(|s| illegal_point2(s))
+        .filter(|&p| p > 0)
+        .collect();
+    points.sort_unstable();
     points[points.len() / 2]
 }
 
@@ -19,12 +23,11 @@ fn illegal_point2(s: &str) -> i64 {
     for ch in s.chars() {
         if open_set.contains(&ch) {
             stack.push_back(ch);
+        } else if stack.is_empty() || stack.back().unwrap() != close_open_mapping.get(&ch).unwrap()
+        {
+            return 0;
         } else {
-            if stack.is_empty() || stack.back().unwrap() != close_open_mapping.get(&ch).unwrap() {
-                return 0;
-            } else {
-                stack.pop_back();
-            }
+            stack.pop_back();
         }
     }
     if stack.is_empty() {
@@ -32,7 +35,9 @@ fn illegal_point2(s: &str) -> i64 {
     }
     let mut total = 0;
     while !stack.is_empty() {
-        let p = points_mapping.get(open_close_mapping.get(&stack.pop_back().unwrap()).unwrap()).unwrap();
+        let p = points_mapping
+            .get(open_close_mapping.get(&stack.pop_back().unwrap()).unwrap())
+            .unwrap();
         total = total * 5 + p;
     }
     total
@@ -48,13 +53,12 @@ fn illegal_point(s: &str) -> i32 {
     for ch in s.chars() {
         if open_set.contains(&ch) {
             stack.push_back(ch);
+        } else if stack.is_empty() || stack.back().unwrap() != close_open_mapping.get(&ch).unwrap()
+        {
+            total += points_mapping.get(&ch).unwrap_or(&0);
+            break;
         } else {
-            if stack.is_empty() || stack.back().unwrap() != close_open_mapping.get(&ch).unwrap() {
-                total += points_mapping.get(&ch).unwrap_or(&0);
-                break;
-            } else {
-                stack.pop_back();
-            }
+            stack.pop_back();
         }
     }
     total
@@ -96,5 +100,4 @@ mod tests {
         let xs = s.split('\n').map(|s| s.to_string()).collect();
         assert_eq!(second_part(&xs), 288957);
     }
-
 }
