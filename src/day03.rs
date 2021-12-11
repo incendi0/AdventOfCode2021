@@ -76,7 +76,7 @@ mod tests {
 11001
 00010
 01010";
-        let xs = s.split_ascii_whitespace().map(|s| s.to_string()).collect();
+        let xs: Vec<String> = s.split_ascii_whitespace().map(|s| s.to_string()).collect();
         assert_eq!(first_part(&xs), 198)
     }
 
@@ -94,7 +94,7 @@ mod tests {
 11001
 00010
 01010";
-        let xs = s.split_ascii_whitespace().map(|s| s.to_string()).collect();
+        let xs: Vec<String> = s.split_ascii_whitespace().map(|s| s.to_string()).collect();
         assert_eq!(second_part(&xs), 230)
     }
 }

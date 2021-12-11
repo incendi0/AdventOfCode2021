@@ -13,6 +13,7 @@ mod day07;
 mod day08;
 mod day09;
 mod day10;
+mod day11;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -90,6 +91,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         let xs = read_to_vec("./input/day10.txt")?;
         println!("day10::partA result: {}", day10::first_part(&xs));
         println!("day10::partB result: {}", day10::second_part(&xs));
+    }
+
+    {
+        let s = read_to_string("./input/day11.txt")?;
+        let mut xs = read_to_matrix(&s);
+        println!("day11::partA result: {}", day11::first_part(&mut xs));
+        let mut xs2 = read_to_matrix(&s);
+        println!("day11::partB result: {}", day11::second_part(&mut xs2));
     }
 
     Ok(())
