@@ -1,3 +1,4 @@
+// 模拟
 pub fn first_part(xs: &[String]) -> i32 {
     let (n, m) = (xs.len(), xs[0].len());
     let count = count_bit_1(xs);

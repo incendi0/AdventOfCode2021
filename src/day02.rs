@@ -1,3 +1,4 @@
+// 模拟，刚开始很友好
 pub fn first_part(ss: &[String]) -> i32 {
     let mut x = 0;
     let mut y = 0;

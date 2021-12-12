@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 
+// 模拟
 pub fn first_part(seq: &[i32], xxs: &[Vec<Vec<i32>>]) -> i32 {
     let n = xxs.len();
     let (row, col) = (xxs[0].len(), xxs[0][0].len());

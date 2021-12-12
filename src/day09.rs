@@ -1,5 +1,7 @@
 use std::collections::VecDeque;
 
+// 第二部分不用想太多，找到最低点，bfs就行
+// 其实并查集也行，记录下思路
 pub fn first_part(matrix: &Vec<Vec<i32>>) -> i32 {
     let lowest = find_lowest(matrix);
     lowest.iter().map(|&(x, y)| matrix[x][y] + 1).sum()

@@ -1,3 +1,4 @@
+// 模拟，rust也能一行
 pub fn first_part(xs: &[i32]) -> u32 {
     xs.windows(2)
         .fold(0, |acc, t| if t[0] < t[1] { acc + 1 } else { acc })

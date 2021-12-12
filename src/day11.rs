@@ -1,5 +1,6 @@
 use std::collections::VecDeque;
 
+// 动态更新 模拟
 pub fn first_part(xs: &mut Vec<Vec<i32>>) -> i32 {
     let mut total = 0;
     for _ in 0..100 {

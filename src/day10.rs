@@ -1,5 +1,7 @@
 use std::collections::{HashMap, HashSet, VecDeque};
 
+// 不要想太复杂，corrupted的排列不用管
+// 使用栈配对就行
 pub fn first_part(xs: &Vec<String>) -> i32 {
     xs.iter().map(|s| illegal_point(s)).sum()
 }

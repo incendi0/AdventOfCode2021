@@ -1,5 +1,10 @@
 use std::collections::{HashMap, HashSet};
 
+// 第一部分直接dfs，注意大写可重复访问，小写只能访问一次，维护一个访问Set
+// 第二部分增加了一个可以访问两次的小写洞穴的动态性质，转化为遍历小写洞穴，每次控制一个洞穴可以访问两次
+// 使用HashMap记录访问次数，其余部分很相似
+
+// 需要注意生命周期标记
 pub fn first_part(graph: &HashMap<&str, Vec<&str>>) -> i32 {
     let mut ret = 0;
     let mut visited: HashSet<&str> = HashSet::new();

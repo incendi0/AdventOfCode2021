@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+// 线段 点 判断，模拟就行
 pub fn count_overlaps(xs: &Vec<String>, is_first_part: bool) -> i32 {
     let mut freq = HashMap::new();
 

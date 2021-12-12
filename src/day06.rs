@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 // 模拟剩余生产天数的成熟鱼和新生鱼
+// 复杂点的兔子问题，类fibonacci数
 pub fn simulate(xs: &Vec<i32>, duration: i32) -> i64 {
     let mut count = HashMap::new();
     let mut total = 0;

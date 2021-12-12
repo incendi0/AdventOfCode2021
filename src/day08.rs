@@ -1,5 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
+// 逻辑题，写起来纯过程式，不是很流畅
 pub fn first_part(xs: &Vec<String>) -> i32 {
     let mut total = 0;
     for s in xs {
