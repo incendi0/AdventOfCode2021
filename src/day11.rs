@@ -33,7 +33,16 @@ fn update(xs: &mut Vec<Vec<i32>>) -> i32 {
     }
     while !queue.is_empty() {
         let (x, y) = queue.pop_back().unwrap();
-        for (dx, dy) in [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, -1), (-1, 1), (1, 1), (1, -1)] {
+        for (dx, dy) in [
+            (0, 1),
+            (1, 0),
+            (0, -1),
+            (-1, 0),
+            (-1, -1),
+            (-1, 1),
+            (1, 1),
+            (1, -1),
+        ] {
             let nx = x as i32 + dx;
             let ny = y as i32 + dy;
             if nx >= 0 && nx < m as i32 && ny >= 0 && ny < n as i32 {
@@ -63,9 +72,9 @@ fn update(xs: &mut Vec<Vec<i32>>) -> i32 {
 
 #[cfg(test)]
 mod tests {
-    use crate::day09::read_to_matrix;
     use super::first_part;
     use super::second_part;
+    use crate::day09::read_to_matrix;
 
     #[test]
     fn first_part_works() {

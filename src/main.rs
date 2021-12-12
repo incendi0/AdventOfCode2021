@@ -1,4 +1,5 @@
 use crate::day09::read_to_matrix;
+use crate::day12::read_to_graph;
 use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
@@ -14,6 +15,7 @@ mod day08;
 mod day09;
 mod day10;
 mod day11;
+mod day12;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -99,6 +101,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day11::partA result: {}", day11::first_part(&mut xs));
         let mut xs2 = read_to_matrix(&s);
         println!("day11::partB result: {}", day11::second_part(&mut xs2));
+    }
+
+    {
+        let s = read_to_string("./input/day12.txt")?;
+        let graph = read_to_graph(&s);
+        println!("day12::partA result: {}", day12::first_part(&graph));
+        println!("day12::partB result: {}", day12::second_part(&graph));
     }
 
     Ok(())
