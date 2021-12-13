@@ -110,6 +110,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day12::partB result: {}", day12::second_part(&graph));
     }
 
+    {
+        let s = read_to_string("./input/day13.txt")?;
+        let (mut paper, instructions) = day13::read_input(&s);
+        println!("day13::partA result: {}", day13::first_part(&mut paper, &instructions));
+        let (mut paper, instructions) = day13::read_input(&s);
+        println!("day13::partB result: {}", day13::second_part(&mut paper, &instructions));
+    }
+    
     Ok(())
 }
 
