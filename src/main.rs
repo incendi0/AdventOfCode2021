@@ -16,6 +16,8 @@ mod day09;
 mod day10;
 mod day11;
 mod day12;
+mod day13;
+mod day14;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -116,6 +118,20 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day13::partA result: {}", day13::first_part(&mut paper, &instructions));
         let (mut paper, instructions) = day13::read_input(&s);
         println!("day13::partB result: {}", day13::second_part(&mut paper, &instructions));
+    }
+    
+    {
+        let s = read_to_string("./input/day14.txt")?;
+        let (mut xs, rules) = day14::read_rules(&s);
+        println!(
+            "day14::partA result: {}",
+            day14::first_part(&mut xs, &rules)
+        );
+        let (mut xs, rules) = day14::read_rules(&s);
+        println!(
+            "day14::partB result: {}",
+            day14::second_part(&mut xs, &rules)
+        );
     }
     
     Ok(())
