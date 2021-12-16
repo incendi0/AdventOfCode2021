@@ -18,6 +18,8 @@ mod day11;
 mod day12;
 mod day13;
 mod day14;
+mod day15;
+mod day16;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -132,6 +134,19 @@ fn main() -> Result<(), Box<dyn Error>> {
             "day14::partB result: {}",
             day14::second_part(&mut xs, &rules)
         );
+    }
+    
+        {
+        let s = read_to_string("./input/day15.txt")?;
+        let xs = day09::read_to_matrix(&s);
+        println!("day15::partA result: {}", day15::first_part(&xs));
+        println!("day15::partB result: {}", day15::second_part(&xs));
+    }
+
+    {
+        let s = read_to_string("./input/day16.txt")?;
+        println!("day16::partA result: {}", day16::first_part(&s.trim()));
+        println!("day16::partB result: {}", day16::second_part(&s.trim()));
     }
     
     Ok(())
