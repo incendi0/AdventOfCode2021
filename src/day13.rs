@@ -46,7 +46,6 @@ pub fn second_part(paper: &mut Paper, instructions: &Vec<Instruction>) -> i32 {
         }
         graph.push_str("\n");
     }
-    println!("{}", graph);
     paper.dots.len() as i32
 }
 

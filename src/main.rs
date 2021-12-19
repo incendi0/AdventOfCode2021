@@ -1,8 +1,9 @@
-use crate::day09::read_to_matrix;
-use crate::day12::read_to_graph;
 use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
+
+use crate::day09::read_to_matrix;
+use crate::day12::read_to_graph;
 
 mod day01;
 mod day02;
@@ -121,7 +122,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let (mut paper, instructions) = day13::read_input(&s);
         println!("day13::partB result: {}", day13::second_part(&mut paper, &instructions));
     }
-    
+
     {
         let s = read_to_string("./input/day14.txt")?;
         let (mut xs, rules) = day14::read_rules(&s);
@@ -135,8 +136,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             day14::second_part(&mut xs, &rules)
         );
     }
-    
-        {
+
+    {
         let s = read_to_string("./input/day15.txt")?;
         let xs = day09::read_to_matrix(&s);
         println!("day15::partA result: {}", day15::first_part(&xs));
@@ -148,7 +149,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day16::partA result: {}", day16::first_part(&s.trim()));
         println!("day16::partB result: {}", day16::second_part(&s.trim()));
     }
-    
+
     Ok(())
 }
 

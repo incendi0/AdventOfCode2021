@@ -1,5 +1,3 @@
-use crate::day16::Packet::LP;
-
 const LITERAL_PACKET_TYPE_ID: u8 = 4;
 
 #[derive(Debug)]
@@ -13,7 +11,6 @@ struct LiteralPacket {
 struct OperatorPacket {
     version: u8,
     type_id: u8,
-    tag: u8,
     sub_packets: Vec<Packet>,
 }
 
@@ -116,7 +113,6 @@ fn sum_version(packet: &Packet) -> i32 {
         }
     }
     dfs(packet, &mut sum);
-    println!("{:?}", sum);
     sum
 }
 
@@ -194,7 +190,6 @@ fn parse_operator(xs: &[u8], curr_idx: &mut usize) -> OperatorPacket {
     OperatorPacket {
         version,
         type_id,
-        tag,
         sub_packets,
     }
 }
