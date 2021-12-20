@@ -33,8 +33,8 @@ fn do_parse_int(s: &[u8], curr_idx: &mut usize) -> Element {
 
 #[cfg(test)]
 mod tests {
-    use crate::day18::Element;
     use super::parse;
+    use crate::day18::Element;
 
     #[test]
     fn parse_works() {

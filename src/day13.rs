@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use crate::day13::Instruction::{FoldLeft, FoldUp};
+use std::collections::HashSet;
 
 #[derive(Debug)]
 pub enum Instruction {
@@ -16,7 +16,11 @@ pub struct Paper {
 
 impl Paper {
     fn new() -> Self {
-        Paper { x: 0, y: 0, dots: HashSet::new()}
+        Paper {
+            x: 0,
+            y: 0,
+            dots: HashSet::new(),
+        }
     }
 }
 
@@ -53,18 +57,23 @@ fn fold_left(paper: &mut Paper, pivot: usize) {
     let mut delta = 0;
     if pivot * 2 < paper.x {
         delta = paper.x - pivot * 2;
-        let adapted_dots: HashSet<(usize, usize)> = paper.dots.iter().map(|&(x, y)| (x + delta, y)).collect();
+        let adapted_dots: HashSet<(usize, usize)> =
+            paper.dots.iter().map(|&(x, y)| (x + delta, y)).collect();
         paper.dots = adapted_dots;
     }
-    let remain_dots: HashSet<(usize, usize)> = paper.dots.iter().flat_map(|&(x, y)| {
-        if x == pivot {
-            None
-        } else if x > pivot {
-            Some((pivot * 2 - x, y))
-        } else {
-            Some((x, y))
-        }
-    }).collect();
+    let remain_dots: HashSet<(usize, usize)> = paper
+        .dots
+        .iter()
+        .flat_map(|&(x, y)| {
+            if x == pivot {
+                None
+            } else if x > pivot {
+                Some((pivot * 2 - x, y))
+            } else {
+                Some((x, y))
+            }
+        })
+        .collect();
     paper.dots = remain_dots;
     paper.x = pivot + delta - 1;
 }
@@ -73,18 +82,23 @@ fn fold_up(paper: &mut Paper, pivot: usize) {
     let mut delta = 0;
     if pivot * 2 < paper.y {
         delta = paper.y - pivot * 2;
-        let adapted_dots: HashSet<(usize, usize)> = paper.dots.iter().map(|&(x, y)| (x, y + delta)).collect();
+        let adapted_dots: HashSet<(usize, usize)> =
+            paper.dots.iter().map(|&(x, y)| (x, y + delta)).collect();
         paper.dots = adapted_dots;
     }
-    let remain_dots: HashSet<(usize, usize)> = paper.dots.iter().flat_map(|&(x, y)| {
-        if y == pivot {
-            None
-        } else if y > pivot {
-            Some((x, pivot * 2 - y))
-        } else {
-            Some((x, y))
-        }
-    }).collect();
+    let remain_dots: HashSet<(usize, usize)> = paper
+        .dots
+        .iter()
+        .flat_map(|&(x, y)| {
+            if y == pivot {
+                None
+            } else if y > pivot {
+                Some((x, pivot * 2 - y))
+            } else {
+                Some((x, y))
+            }
+        })
+        .collect();
     paper.dots = remain_dots;
     paper.y = pivot + delta - 1;
 }
@@ -99,7 +113,10 @@ pub fn read_input(s: &str) -> (Paper, Vec<Instruction>) {
             continue;
         }
         if !flag {
-            let xs: Vec<usize> = line.split(',').map(|s| s.parse::<usize>().unwrap()).collect();
+            let xs: Vec<usize> = line
+                .split(',')
+                .map(|s| s.parse::<usize>().unwrap())
+                .collect();
             let (x, y) = (xs[0], xs[1]);
             paper.x = paper.x.max(x);
             paper.y = paper.y.max(y);
@@ -120,8 +137,8 @@ pub fn read_input(s: &str) -> (Paper, Vec<Instruction>) {
 
 #[cfg(test)]
 mod tests {
-    use super::read_input;
     use super::first_part;
+    use super::read_input;
     use super::second_part;
 
     #[test]

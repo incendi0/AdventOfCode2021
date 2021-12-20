@@ -93,9 +93,9 @@ pub fn read_rules(s: &str) -> (Vec<u8>, HashMap<Vec<u8>, u8>) {
 
 #[cfg(test)]
 mod tests {
-    use crate::day14::second_part;
     use super::first_part;
     use super::read_rules;
+    use crate::day14::second_part;
 
     #[test]
     fn first_part_works() {

@@ -4,6 +4,7 @@ use std::io::{BufRead, BufReader, Read};
 
 use crate::day09::read_to_matrix;
 use crate::day12::read_to_graph;
+use crate::day20::read_images;
 
 mod day01;
 mod day02;
@@ -21,6 +22,9 @@ mod day13;
 mod day14;
 mod day15;
 mod day16;
+mod day17;
+mod day18;
+mod day20;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -118,9 +122,15 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         let s = read_to_string("./input/day13.txt")?;
         let (mut paper, instructions) = day13::read_input(&s);
-        println!("day13::partA result: {}", day13::first_part(&mut paper, &instructions));
+        println!(
+            "day13::partA result: {}",
+            day13::first_part(&mut paper, &instructions)
+        );
         let (mut paper, instructions) = day13::read_input(&s);
-        println!("day13::partB result: {}", day13::second_part(&mut paper, &instructions));
+        println!(
+            "day13::partB result: {}",
+            day13::second_part(&mut paper, &instructions)
+        );
     }
 
     {
@@ -148,6 +158,20 @@ fn main() -> Result<(), Box<dyn Error>> {
         let s = read_to_string("./input/day16.txt")?;
         println!("day16::partA result: {}", day16::first_part(&s.trim()));
         println!("day16::partB result: {}", day16::second_part(&s.trim()));
+    }
+
+    {
+        let s = read_to_string("./input/day17.txt")?;
+        println!("day17::partA result: {}", day17::first_part(&s));
+        println!("day17::partB result: {}", day17::second_part(&s));
+    }
+
+    {
+        let s = read_to_string("./input/day20.txt")?;
+        let (algo, image) = day20::read_images(&s);
+        println!("day20::partA result: {}", day20::first_part(algo, image));
+        let (algo, image) = day20::read_images(&s);
+        println!("day20::partB result: {}", day20::second_part(algo, image));
     }
 
     Ok(())

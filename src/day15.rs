@@ -25,10 +25,14 @@ pub fn first_part(xs: &Vec<Vec<i32>>) -> i32 {
     let (m, n) = (xs.len(), xs[0].len());
     let mut distance = vec![vec![i32::MAX; n]; m];
     let mut heap = BinaryHeap::new();
-    heap.push(State { cost: 0, x: 0, y: 0});
+    heap.push(State {
+        cost: 0,
+        x: 0,
+        y: 0,
+    });
     distance[0][0] = 0;
 
-    while let Some(State {cost, x, y}) = heap.pop() {
+    while let Some(State { cost, x, y }) = heap.pop() {
         if x == m - 1 && y == n - 1 {
             return cost;
         }
@@ -36,7 +40,11 @@ pub fn first_part(xs: &Vec<Vec<i32>>) -> i32 {
             continue;
         }
         for (nx, ny) in neighbours((x, y), m, n) {
-            let next_state = State {cost: cost + xs[nx][ny], x: nx, y: ny};
+            let next_state = State {
+                cost: cost + xs[nx][ny],
+                x: nx,
+                y: ny,
+            };
             if next_state.cost < distance[nx][ny] {
                 heap.push(next_state);
                 distance[nx][ny] = next_state.cost;
@@ -62,8 +70,8 @@ fn neighbours(pos: (usize, usize), m: usize, n: usize) -> Vec<(usize, usize)> {
 pub fn second_part(xs: &Vec<Vec<i32>>) -> i32 {
     let (m, n) = (xs.len(), xs[0].len());
     let mut expanded = vec![vec![0; n * 5]; m * 5];
-    for i in 0..m*5 {
-        for j in 0..n*5 {
+    for i in 0..m * 5 {
+        for j in 0..n * 5 {
             let (x, y) = (i % m, j % n);
             let v = xs[x][y] + (i / m) as i32 + (j / n) as i32;
             expanded[i][j] = v % 10 + v / 10;
@@ -72,12 +80,11 @@ pub fn second_part(xs: &Vec<Vec<i32>>) -> i32 {
     first_part(&expanded)
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::first_part;
-    use crate::day09::read_to_matrix;
     use super::second_part;
+    use crate::day09::read_to_matrix;
 
     #[test]
     fn first_part_works() {

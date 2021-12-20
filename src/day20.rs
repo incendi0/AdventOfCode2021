@@ -3,7 +3,9 @@ pub fn first_part(algo: Vec<u8>, image: Vec<Vec<u8>>) -> i32 {
     let first_image = enhance_once(&algo, &image, v);
     v = algo[0];
     let second_image = enhance_once(&algo, &first_image, v);
-    second_image.iter().fold(0, |acc, row| acc + row.iter().filter(|e| **e == b'#').count() as i32)
+    second_image.iter().fold(0, |acc, row| {
+        acc + row.iter().filter(|e| **e == b'#').count() as i32
+    })
 }
 
 pub fn second_part(algo: Vec<u8>, image: Vec<Vec<u8>>) -> i32 {
@@ -13,7 +15,9 @@ pub fn second_part(algo: Vec<u8>, image: Vec<Vec<u8>>) -> i32 {
         image = enhance_once(&algo, &image, v);
         v = if v == b'.' { algo[0] } else { algo[511] };
     }
-    image.iter().fold(0, |acc, row| acc + row.iter().filter(|e| **e == b'#').count() as i32)
+    image.iter().fold(0, |acc, row| {
+        acc + row.iter().filter(|e| **e == b'#').count() as i32
+    })
 }
 
 fn print_image(image: &Vec<Vec<u8>>) {
@@ -29,7 +33,17 @@ fn enhance_once(algo: &Vec<u8>, image: &Vec<Vec<u8>>, v: u8) -> Vec<Vec<u8>> {
     for i in -1..=m as i32 {
         for j in -1..=n as i32 {
             let mut xs = vec![];
-            for (dx, dy) in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 0), (0, 1), (1, -1), (1, 0), (1, 1)] {
+            for (dx, dy) in [
+                (-1, -1),
+                (-1, 0),
+                (-1, 1),
+                (0, -1),
+                (0, 0),
+                (0, 1),
+                (1, -1),
+                (1, 0),
+                (1, 1),
+            ] {
                 let ni = i + dx;
                 let nj = j + dy;
                 if ni >= 0 && ni < m as i32 && nj >= 0 && nj < n as i32 {
@@ -70,12 +84,11 @@ pub fn read_images(s: &str) -> (Vec<u8>, Vec<Vec<u8>>) {
     (algo, image)
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::first_part;
-    use super::second_part;
     use super::read_images;
+    use super::second_part;
 
     #[test]
     fn first_part_works() {
