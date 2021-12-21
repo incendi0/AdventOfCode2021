@@ -25,6 +25,7 @@ mod day16;
 mod day17;
 mod day18;
 mod day20;
+mod day21;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -172,6 +173,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("day20::partA result: {}", day20::first_part(algo, image));
         let (algo, image) = day20::read_images(&s);
         println!("day20::partB result: {}", day20::second_part(algo, image));
+    }
+    
+    
+    {
+        println!("day21::partA result: {}", day21::first_part(1, 10));
+        println!("day21::partA result: {}", day21::second_part(1, 10));
     }
 
     Ok(())
