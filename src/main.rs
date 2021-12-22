@@ -26,6 +26,7 @@ mod day17;
 mod day18;
 mod day20;
 mod day21;
+mod day22;
 
 fn main() -> Result<(), Box<dyn Error>> {
     {
@@ -179,6 +180,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         println!("day21::partA result: {}", day21::first_part(1, 10));
         println!("day21::partA result: {}", day21::second_part(1, 10));
+    }
+    
+        {
+        let s = read_to_string("./input/day22.txt")?;
+        let ops = day22::read_to_commands(&s);
+        println!("day22::partA result: {}", day22::first_part(&ops));
+        println!("day22::partA result: {}", day22::second_part(&ops));
     }
 
     Ok(())
