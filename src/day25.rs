@@ -1,7 +1,6 @@
 pub fn first_part(xs: Vec<Vec<u8>>) -> i32 {
     let mut board = xs;
     let (m, n) = (board.len(), board[0].len());
-    let mut move_east_flag = true;
     let mut step = 0;
 
     loop {
